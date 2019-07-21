@@ -1,0 +1,35 @@
+<h1>Contact us:</h1>
+
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+  <!-- will only show up once form is submitted & it's valid -->
+  <h3 *ngIf="success">Your form is valid!</h3>
+
+  <label>
+    Name:
+    <input type="text" formControlName="name">
+    <!-- will only show if has been submitted and there are errors -->
+    <div *ngIf="submitted && messageForm.controls.name.errors">
+      <div *ngIf="messageForm.controls.name.errors.required" class="error">Your name is required</div>
+    </div>
+  </label>
+
+  <label>
+    Message:
+    <textarea formControlName="message"></textarea>
+    <!-- will only show if has been submitted and there are errors -->
+    <div *ngIf="submitted && messageForm.controls.message.errors">
+      <div *ngIf="messageForm.controls.message.errors.required" class="error">A message is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="Send message" class="cta">
+
+</form>
+
+<div *ngIf="submitted" class="results">
+  <strong>Name:</strong>
+  <span>{{ messageForm.controls.name.value }}</span>
+
+  <strong>Message:</strong>
+  <span>{{ messageForm.controls.message.value }}</span>
+</div>
